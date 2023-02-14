@@ -6,17 +6,17 @@ import lombok.Data;
 @Data
 public class Investment {
     @JsonProperty("init_amount")
-    private Integer initAmount;
+    private float initAmount;
 
-    @JsonProperty("annual_investment")
-    private Integer annualInvestment;
+    @JsonProperty("annual_contribution")
+    private float annualContribution;
 
     @JsonProperty("annual_increment")
-    private Integer annualIncrement;
+    private float annualIncrement;
 
     @JsonProperty("investment_time")
-    private Integer investmentTime;
+    private int investmentTime;
 
     @JsonProperty("investment_return")
-    private Integer investmentReturn;
+    private float investmentReturn;
 }
