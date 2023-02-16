@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InvestmentService {
@@ -37,5 +38,14 @@ public class InvestmentService {
         }
 
         return investmentResponses;
+    }
+
+    public Float calculateProfit(List<InvestmentResponse> investmentResponses) {
+        Optional<Float> returnSum = investmentResponses.stream()
+                .map(InvestmentResponse::getContribution)
+                .reduce(Float::sum);
+        return investmentResponses.get(investmentResponses.size()-1).getFinalAmount()
+                - investmentResponses.get(0).getInitAmount()
+                - returnSum.get();
     }
 }

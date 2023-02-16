@@ -4,10 +4,7 @@ import examen.davidmorgan.models.Investment;
 import examen.davidmorgan.models.InvestmentResponse;
 import examen.davidmorgan.services.InvestmentService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,4 +26,13 @@ public class InvestmentController {
         return _response.map(investmentResponse -> ResponseEntity.ok().body(investmentResponse))
                 .orElse(ResponseEntity.internalServerError().build());
     }
+
+    @PostMapping("/profit")
+    public ResponseEntity<Float> calculateProfit(@RequestBody List<InvestmentResponse> investmentResponses) {
+        Optional<Float> _profit = Optional.ofNullable(investmentService.calculateProfit(investmentResponses));
+
+        return _profit.map(profit -> ResponseEntity.ok().body(profit))
+                .orElse(ResponseEntity.internalServerError().build());
+    }
+
 }
